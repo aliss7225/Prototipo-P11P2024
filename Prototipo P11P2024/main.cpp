@@ -6,7 +6,7 @@
 #include <iomanip>
 
 using namespace std;
-
+//funciones que van a definir los limites que debe contener cada matriz
 #define NUMERO_ALUMNOS 5
 #define NUMERO_MATERIAS 5
 #define NUMERO_NOTAS 4
