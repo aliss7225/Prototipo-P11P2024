@@ -45,25 +45,63 @@ void llamaCiclo()
         promedio_facultad_1=0;
         promedio_facultad_2=0;
         promedio_facultad_3=0;
-        cout << "*** Comparativo de Facultades ***" << endl << endl;
+        cout << "*** Cuadro Comparativo de Facultades ***" << endl << endl;
         llenarMatriz(matriz_facultad_1);
-        promedio_facultad_1 = imprimirMatriz(matriz_facultad_1, alumnos, "Facultad de Ingenieria");
+        promedio_facultad_1 = imprimirMatriz(matriz_facultad_1, alumnos, "Facultad de Medicina");
         llenarMatriz(matriz_facultad_2);
-        promedio_facultad_2 = imprimirMatriz(matriz_facultad_2, alumnos, "Facultad de Arquitectura");
+        promedio_facultad_2 = imprimirMatriz(matriz_facultad_2, alumnos, "Facultad de Derecho");
         llenarMatriz(matriz_facultad_3);
-        promedio_facultad_3 = imprimirMatriz(matriz_facultad_3, alumnos, "Facultad de Administracion");
+        promedio_facultad_3 = imprimirMatriz(matriz_facultad_3, alumnos, "Facultad de Ingenieria");
         if (promedio_facultad_1 > promedio_facultad_2 && promedio_facultad_1 > promedio_facultad_3)
         {
-            cout << " La facultad con el mejor promedio es : " << "Facultad de Ingenieria" << " Promedio: " << promedio_facultad_1 << endl;
+            cout << " La facultad con el mejor promedio es : " << "Facultad de Medicina" << " Promedio: " << promedio_facultad_1 << endl;
         } else
         if (promedio_facultad_2 > promedio_facultad_1 && promedio_facultad_2 > promedio_facultad_3)
         {
-            cout << " La facultad con el mejor promedio es : " << "Facultad de Arquitectura" << " Promedio: " << promedio_facultad_2 << endl;
+            cout << " La facultad con el mejor promedio es : " << "Facultad de Derecho" << " Promedio: " << promedio_facultad_2 << endl;
         } else
         if (promedio_facultad_3 > promedio_facultad_2 && promedio_facultad_3 > promedio_facultad_1)
         {
-            cout << " La facultad con el mejor promedio es : " << "Facultad de Administracion" << " Promedio: " << promedio_facultad_3 << endl;
+            cout << " La facultad con el mejor promedio es : " << "Facultad de Ingeniería" << " Promedio: " << promedio_facultad_3 << endl;
         } else
         {
-            cout << " Algunas facultades tienen el mismo promedio " << endl << endl;
+            cout << " Puede que las facultades tengan el mismo promedio " << endl << endl;
         }
+        cout << "Desea otro calculo (s/n)? ";
+        cin >> opcion;
+        if (opcion == 'n')
+        {
+            repetir=false;
+        }
+    } while (repetir);
+}
+int busquedaAleatorios(int minimo, int maximo)
+{
+    return minimo + rand() / (RAND_MAX / (maximo - minimo + 1) + 1);
+}
+
+void llenarMatriz(float matriz[NUMERO_ALUMNOS][NUMERO_NOTAS + 1])
+{
+    int y, x;
+    for (y = 0; y < NUMERO_ALUMNOS; y++)
+    {
+        float suma = 0;
+        int calificacion = 0;
+        for (x = 0; x < NUMERO_NOTAS; x++)
+        {
+            if (x == 0 || x == 3)  //Se determina la nota de cada parcial utilizando las funciones de min
+            {
+                calificacion = busquedaAleatorios(MIN_CALIFICACION, 20);
+            } else if (x == 1)
+            {
+                calificacion = busquedaAleatorios(MIN_CALIFICACION, 25);
+            } else if (x == 2)
+            {
+                calificacion = busquedaAleatorios(MIN_CALIFICACION, 35);
+            }
+            suma += (float)calificacion;
+            matriz[y][x] = calificacion;
+            calificacion=0;
+        }
+        // Agregar promedio
+
