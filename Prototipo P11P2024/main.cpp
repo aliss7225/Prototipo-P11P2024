@@ -27,7 +27,7 @@ int main()
 }
 void llamaCiclo()
 {
-    //datos flotantes que determinan la cantidad de matrices que se van a dise�ar y los datos que estos deben contener
+    //datos flotantes que determinan la cantidad de matrices que se van a diseñar y los datos que estos deben contener
     float matriz_facultad_1[NUMERO_ALUMNOS][NUMERO_NOTAS + 1];
     float matriz_facultad_2[NUMERO_ALUMNOS][NUMERO_NOTAS + 1];
     float matriz_facultad_3[NUMERO_ALUMNOS][NUMERO_NOTAS + 1];
@@ -62,7 +62,7 @@ void llamaCiclo()
         } else
         if (promedio_facultad_3 > promedio_facultad_2 && promedio_facultad_3 > promedio_facultad_1)
         {
-            cout << " La facultad con el mejor promedio es : " << "Facultad de Ingenier�a" << " Promedio: " << promedio_facultad_3 << endl;
+            cout << " La facultad con el mejor promedio es : " << "Facultad de Ingeniería" << " Promedio: " << promedio_facultad_3 << endl;
         } else
         {
             cout << " Puede que las facultades tengan el mismo promedio " << endl << endl;
@@ -89,7 +89,7 @@ void llenarMatriz(float matriz[NUMERO_ALUMNOS][NUMERO_NOTAS + 1])
         int calificacion = 0;
         for (x = 0; x < NUMERO_NOTAS; x++)
         {
-            if (x == 0 || x == 3)  //Se determina la nota de cada parcial utilizando las funciones de min
+            if (x == 0 || x == 3)  //Se determina la nota de cada parcial utilizando las funciones que engloban los limites.
             {
                 calificacion = busquedaAleatorios(MIN_CALIFICACION, 20);
             } else if (x == 1)
@@ -105,3 +105,39 @@ void llenarMatriz(float matriz[NUMERO_ALUMNOS][NUMERO_NOTAS + 1])
         }
         // Agregar promedio
 
+                matriz[y][NUMERO_NOTAS] = suma;
+    }
+}
+// función que imprime la linea divisioria entre los renglones de la matríz
+void imprimirMatrizLinea()
+{
+    int x;
+
+    cout << "+--------";
+    for (x = 0; x < NUMERO_NOTAS + 1; x++)
+    {
+        cout << "+---------";
+    }
+    cout << "+\n";
+}
+float imprimirMatriz(float matriz[NUMERO_ALUMNOS][NUMERO_NOTAS + 1], char alumnos[NUMERO_ALUMNOS][MAXIMA_LONGITUD_CADENA], string nombreFacultad)
+{
+    //Funci�n que imprime la matriz en pantalla y realizando los calculos necesarios del promedio
+    int y, x;
+
+    float promedioMayor = matriz[0][NUMERO_NOTAS];
+    float promedioMenor = matriz[0][NUMERO_NOTAS];
+    float totalGeneral = 0;
+    float promedioGeneral = 0;
+    char alumnoPromedioMayor[MAXIMA_LONGITUD_CADENA];
+    char alumnoPromedioMenor[MAXIMA_LONGITUD_CADENA];
+    memcpy(alumnoPromedioMayor, alumnos[0], MAXIMA_LONGITUD_CADENA);
+    memcpy(alumnoPromedioMenor, alumnos[0], MAXIMA_LONGITUD_CADENA);
+    cout << nombreFacultad << endl;
+    cout << "(Nota1)=>Primer Parcial  (Nota2)=>Segundo Parcial (Nota3)=>Final (Nota4)=>Actividades" << endl;
+    imprimirMatrizLinea();
+    cout << setw(9) << "Alumno";
+    for (x = 0; x < NUMERO_NOTAS; x++)
+    {
+        cout << setw(9) << "Nota" << x + 1;
+    }
