@@ -62,7 +62,7 @@ void llamaCiclo()
         } else
         if (promedio_facultad_3 > promedio_facultad_2 && promedio_facultad_3 > promedio_facultad_1)
         {
-            cout << " La facultad con el mejor promedio es : " << "Facultad de Ingeniería" << " Promedio: " << promedio_facultad_3 << endl;
+            cout << " La facultad con el mejor promedio es : " << "Facultad de Ingenieria" << " Promedio: " << promedio_facultad_3 << endl;
         } else
         {
             cout << " Puede que las facultades tengan el mismo promedio " << endl << endl;
@@ -141,3 +141,35 @@ float imprimirMatriz(float matriz[NUMERO_ALUMNOS][NUMERO_NOTAS + 1], char alumno
     {
         cout << setw(9) << "Nota" << x + 1;
     }
+cout << setw(8) << "Tot" << endl;
+    imprimirMatrizLinea();
+    for (y = 0; y < NUMERO_ALUMNOS; y++)
+    {
+        cout << "!" << setw(8) << alumnos[y] << "!";
+        float suma = 0;
+        for (x = 0; x < NUMERO_NOTAS; x++)
+        {
+            int calificacion = matriz[y][x];
+            cout << setw(9) << calificacion << "!";
+        }
+        float promedio = matriz[y][NUMERO_NOTAS];
+        totalGeneral += matriz[y][NUMERO_NOTAS];
+        if (promedio > promedioMayor)
+        {
+            promedioMayor = promedio;
+            memcpy(alumnoPromedioMayor, alumnos[y], MAXIMA_LONGITUD_CADENA);
+        }
+        if (promedio < promedioMenor)
+        {
+            promedioMenor = promedio;
+            memcpy(alumnoPromedioMenor, alumnos[y], MAXIMA_LONGITUD_CADENA);
+        }
+        cout << setw(9) << fixed << setprecision(2) << promedio << "!" << endl;
+        imprimirMatrizLinea();
+    }
+    promedioGeneral = totalGeneral / NUMERO_ALUMNOS;
+    cout << "Nota mayor: " << setw(10) << alumnoPromedioMayor <<  setw(10) << promedioMayor << endl;
+    cout << "Nota menor: " << setw(10) << alumnoPromedioMenor <<  setw(10) << promedioMenor << endl;
+    cout << "Nota prom : " << setw(10) <<  promedioGeneral << endl << endl;
+    return promedioGeneral;
+}
